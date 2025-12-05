@@ -1,0 +1,73 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 380px;
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  border: 2px solid var(--greenBack);
+  position: relative;
+  text-align: center;
+}
+
+.close-btn {
+  border: none;
+  background: transparent;
+  font-size: 26px;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  color: var(--greenBack);
+}
+
+.modal-box h2 {
+  color: var(--greenBack);
+  margin-bottom: 20px;
+}
+
+.modal-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-box input {
+  padding: 12px;
+  border: 2px solid var(--greenBack);
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.btn-outline {
+  padding: 12px;
+  background: white;
+  border: 2px solid var(--greenBack);
+  border-radius: 8px;
+  color: var(--greenBack);
+  font-weight: bold;
+}
+
+.switch-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.switch-link {
+  margin-left: 5px;
+  color: var(--green);
+  font-weight: bold;
+  cursor: pointer;
+}

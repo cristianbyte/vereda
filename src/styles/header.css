@@ -1,0 +1,43 @@
+.header {
+  position: fixed;
+  display: flex;
+  top: 2vh;
+  z-index: 100;
+  width: min(100vw, 1600px);
+}
+
+.container-header {
+  display: flex;
+  padding: 15px 20px;
+  margin: 0 2vw;
+  width: 100%;
+  border-radius: 10px;
+  background: radial-gradient(
+    circle at 0% 50%,
+    var(--greenBack2),
+    var(--greenBack) 100%
+  );
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  width: min-content;
+}
+
+svg path {
+  fill: var(--white);
+}
+
+nav {
+  display: flex;
+  gap: 3vw;
+  text-decoration: none;
+  color: var(--white);
+  font-weight: bold;
+}
+
+nav div {
+  cursor: pointer;
+}

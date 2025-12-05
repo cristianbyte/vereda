@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --green: #60efb8;
+  --greenBack: #145a32;
+  --greenBack2: #1abc9c;
+  --white: #ffffff;
+  --text-dark: #1a1a1a;
+  --fontSizeLarge: calc(1.5rem + 0.5vw);
+  --fontSizeMedium: calc(1.2rem + 0.3vw);
+  --fontSizeSmall: calc(1rem + 0.2vw);
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+body {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  /* font-family: "Nunito", sans-serif; */
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-size: var(--fontSizeSmall);
+  background-color: var(--white);
+  color: var(--text-dark);
+}
+
+button {
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+  font-size: var(--fontSizeSmall);
+  border: unset;
+  cursor: pointer;
+}
+
+.app {
+  width: min(100vw, 1600px);
+  overflow-x: hidden;
+}
