@@ -1,3 +1,4 @@
+import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import "./styles/global.css";
 function App() {
@@ -5,6 +6,7 @@ function App() {
     <>
       <div className="app">
         <Home />
+        {/* <Dashboard /> */}
       </div>
     </>
   );

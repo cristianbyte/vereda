@@ -7,14 +7,7 @@ export default function Header() {
   const [initialMode, setInitialMode] = useState("login");
 
   return (
-    <header className="header">
-      {modalOpen && (
-        <ModalAuth
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-          initialMode={initialMode}
-        />
-      )}
+    <div className="header">
       <div className="container-header">
         <a href="/" rel="noopener noreferrer">
           <svg
@@ -50,6 +43,13 @@ export default function Header() {
           </div>
         </nav>
       </div>
-    </header>
+      {modalOpen && (
+        <ModalAuth
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          initialMode={initialMode}
+        />
+      )}
+    </div>
   );
 }

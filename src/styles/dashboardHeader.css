@@ -1,0 +1,26 @@
+.dashboardHeader {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboardheader-container {
+  display: flex;
+  padding: 15px 0px;
+  margin: 0;
+  width: 100%;
+  border-radius: 10px;
+  background: radial-gradient(
+    circle at 0% 50%,
+    var(--greenBack2),
+    var(--greenBack) 100%
+  );
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

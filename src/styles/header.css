@@ -1,17 +1,19 @@
 .header {
-  position: fixed;
+  top: 2%;
+  left: 2%;
+  position: sticky;
   display: flex;
-  top: 2vh;
+  width: min(100vw, 1300px);
   z-index: 100;
-  width: min(100vw, 1600px);
+  overflow: hidden;
 }
 
 .container-header {
   display: flex;
-  padding: 15px 20px;
-  margin: 0 2vw;
   width: 100%;
+  padding: 15px 20px;
   border-radius: 10px;
+  margin: 0 2%;
   background: radial-gradient(
     circle at 0% 50%,
     var(--greenBack2),
@@ -21,13 +23,8 @@
   align-items: center;
 }
 
-.logo {
-  height: 40px;
-  width: min-content;
-}
-
-svg path {
-  fill: var(--white);
+.container-header div {
+  padding: 5px;
 }
 
 nav {
