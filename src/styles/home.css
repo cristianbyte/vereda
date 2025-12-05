@@ -21,7 +21,7 @@
   overflow: hidden;
   width: min(100vw, 1300px);
   margin: 0 2%;
-  height: 50vh;
+  max-height: 500px;
   box-sizing: border-box;
   background: radial-gradient(
     circle at 80% 80%,

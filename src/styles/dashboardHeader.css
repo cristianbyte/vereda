@@ -1,12 +1,12 @@
 .dashboardHeader {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
 .dashboardheader-container {
   display: flex;
-  padding: 15px 0px;
+  padding: 15px 20px;
   margin: 0;
   width: 100%;
   border-radius: 10px;

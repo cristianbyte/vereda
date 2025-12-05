@@ -1,5 +1,5 @@
-import Logo from "../assets/logo.jsx";
-import LogOut from "../assets/logOut.jsx";
+import Logo from "../icons/logo.jsx";
+import LogOut from "../icons/logOut.jsx";
 import "../styles/header.css";
 import "../styles/dashboardHeader.css";
 

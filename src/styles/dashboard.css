@@ -1,8 +1,7 @@
 .dashboard {
   padding: 20px;
   overflow: hidden;
-  width: 80%;
-  background-color: aqua;
+  width: 100%;
 }
 
 .dashboard-header {
@@ -10,8 +9,6 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid var(--green);
-  padding-bottom: 10px;
-  margin-bottom: 25px;
 }
 
 .logo {
@@ -41,30 +38,85 @@
   margin-bottom: 15px;
 }
 
-.new-delivery-btn {
-  margin-bottom: 25px;
+.btn-nuevo {
+  transition: 0.2s all ease;
+  background: transparent;
+  border: 2px solid var(--greenBack);
+  border-radius: 10px;
+  width: 100% !important;
+  margin: 20px 0;
+  padding: var(--fontSizeSmall);
+  color: var(--greenBack);
+  font-size: var(--fontSizeMedium);
+  font-weight: 500;
+}
+
+.btn-nuevo::before {
+  content: "+";
+  font-weight: bold;
+  font-size: var(--fontSizeMedium);
+  margin-right: 10px;
+}
+
+.btn-nuevo:hover {
+  background: var(--greenBack2);
+  color: var(--white);
+  border-color: var(--greenBack2);
 }
 
 .orders-container {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
+}
+
+.order-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .order-section h3 {
   margin-bottom: 10px;
-  color: var(--green);
+  color: var(--greenBack);
   font-size: 18px;
 }
 
 .order-card {
-  border: 2px solid var(--green);
+  border: 2px solid var(--greenBack);
   border-radius: 10px;
   padding: 15px;
   background: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 6px;
+}
+
+.order-detalles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: auto;
+}
+
+.order-detalles button {
+  width: 80%;
+}
+
+.order-detalles img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 50%;
 }
 
 .order-notes {

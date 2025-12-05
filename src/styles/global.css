@@ -5,7 +5,7 @@
   --greenBack: #145a32;
   --greenBack2: #1abc9c;
   --white: #ffffff;
-  --text-dark: #1a1a1a;
+  --text: #4e4e4e;
   --fontSizeLarge: calc(1.5rem + 0.5vw);
   --fontSizeMedium: calc(1.2rem + 0.3vw);
   --fontSizeSmall: calc(1rem + 0.2vw);
@@ -42,4 +42,18 @@ button {
 
 .app {
   width: min(100vw, 1300px);
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: 2px solid var(--greenBack2);
 }
