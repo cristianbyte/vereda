@@ -1,11 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useUsuario } from "../context/ProvedorUsuario";
 import CrearPedido from "../components/CrearPedido";
 import DashboardHeader from "../components/DashboardHeader";
 import "../styles/dashboard.css";
+import { useEffect } from "react";
 
 export default function Dashboard() {
-  const [user] = useState({ name: "Juan Pérez" });
+  const { usuario, crearUsuario, eliminarUsuario, cargando } = useUsuario();
   const [modalOpen, setModalOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const orders = {
     creadas: [
@@ -109,9 +114,17 @@ export default function Dashboard() {
     ],
   };
 
+  useEffect(() => {
+    if (!usuario) {
+      navigate("/");
+    }
+  }, [usuario, navigate]);
+
+  console.log("Usuario en Dashboard:", usuario?.username);
+
   return (
     <div className="dashboard">
-      <DashboardHeader user={user} />
+      <DashboardHeader user={usuario?.username} onLogOut={eliminarUsuario} />
 
       <button className="btn-nuevo" onClick={() => setModalOpen(true)}>
         Crear Pedido

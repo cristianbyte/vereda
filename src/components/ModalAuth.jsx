@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useUsuario } from "../context/ProvedorUsuario";
 import "../styles/modalAuth.css";
 
 export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
   const [mode, setMode] = useState(initialMode);
+  const navigate = useNavigate();
+  const { usuario, cargando, obtenerUsuario, crearUsuario } = useUsuario();
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,19 +36,28 @@ export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (mode === "register" && fullName.trim().length < 3) {
+    if (!fullName.trim()) {
+      newErrors.fullName = "El nombre es requerido";
+    } else if (mode === "register" && fullName.trim().length < 3) {
       newErrors.fullName = "El nombre debe tener al menos 3 caracteres";
     }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      newErrors.email = "Correo electrónico inválido";
+    // EMAIL: solo en REGISTER
+    if (mode === "register") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.trim()) {
+        newErrors.email = "El correo es requerido";
+      } else if (!emailRegex.test(email)) {
+        newErrors.email = "Correo electrónico inválido";
+      }
     }
 
-    if (mode == "register" && password.length < 6) {
+    if (!password) {
+      newErrors.password = "La contraseña es requerida";
+    } else if (mode === "register" && password.length < 6) {
       newErrors.password = "La contraseña debe tener al menos 6 caracteres";
     }
 
+    // CONFIRMAR PASSWORD: solo en REGISTER
     if (mode === "register" && password !== confirmPassword) {
       newErrors.confirmPassword = "Las contraseñas no coinciden";
     }
@@ -53,17 +66,21 @@ export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
+      console.log("Validation failed:", errors);
       return;
     }
 
     if (mode === "login") {
-      console.log("Iniciar sesión con:", { email, password });
+      console.log("Logging in with:", fullName, password);
+      const res = await obtenerUsuario(fullName, password);
+      res && navigate("/dashboard");
     } else {
-      console.log("Registrar usuario:", { fullName, email, password });
+      const res = await crearUsuario(fullName, email, password);
+      res && navigate("/dashboard");
     }
   };
 
@@ -77,29 +94,31 @@ export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
         <h2>{mode === "login" ? "Iniciar Sesión" : "Crear Cuenta"}</h2>
 
         <form onSubmit={handleSubmit}>
+          <div>
+            <input
+              type="text"
+              placeholder="Nombre"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
+            {errors.fullName && (
+              <span className="error-text">{errors.fullName}</span>
+            )}
+          </div>
+
           {mode === "register" && (
             <div>
               <input
                 type="text"
-                placeholder="Nombre completo"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Correo electrónico"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              {errors.fullName && (
-                <span className="error-text">{errors.fullName}</span>
+              {errors.email && (
+                <span className="error-text">{errors.email}</span>
               )}
             </div>
           )}
-
-          <div>
-            <input
-              type="text"
-              placeholder="Correo electrónico"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            {errors.email && <span className="error-text">{errors.email}</span>}
-          </div>
 
           <div>
             <input

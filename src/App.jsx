@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ProveedorUsuario } from "./context/ProvedorUsuario";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import "./styles/global.css";
@@ -6,12 +7,14 @@ import "./styles/global.css";
 function App() {
   return (
     <BrowserRouter>
-      <div className="app">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </div>
+      <ProveedorUsuario>
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </div>
+      </ProveedorUsuario>
     </BrowserRouter>
   );
 }
