@@ -75,18 +75,31 @@ export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
     }
 
     if (mode === "login") {
-      let res;
       try {
-        res = await obtenerUsuario(fullName, password);
-
+        const res = await obtenerUsuario(fullName, password);
         navigate("/dashboard");
       } catch (error) {
         setErrors({ password: "Nombre o contraseña incorrectos" });
         console.error(error);
       }
     } else {
-      const res = await crearUsuario(fullName, email, password);
-      res && navigate("/dashboard");
+      try {
+        const res = await crearUsuario(fullName, email, password);
+        navigate("/dashboard");
+      } catch (error) {
+        if (error) {
+          setErrors({ fullName: "Este nombre de usuario ya está registrado" });
+        } else if (error.response?.data?.message) {
+          setErrors({ general: error.response.data.message });
+        } else if (error.message) {
+          setErrors({ general: error.message });
+        } else {
+          setErrors({
+            general: "Error al crear la cuenta. Intenta nuevamente",
+          });
+        }
+        console.error(error);
+      }
     }
   };
 

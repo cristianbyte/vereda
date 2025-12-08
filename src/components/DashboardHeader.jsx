@@ -25,7 +25,7 @@ export default function DashboardHeader({ user, onLogOut }) {
             Salir <LogOut />
           </div>
         </nav>
-        <div className="menu-toggle">
+        <div className="menu-toggle" onClick={handleLogOut}>
           <LogOut />
         </div>
       </div>
