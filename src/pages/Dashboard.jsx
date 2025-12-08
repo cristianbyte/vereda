@@ -1,16 +1,23 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useUsuario } from "../context/ProvedorUsuario";
-import CrearPedido from "../components/CrearPedido";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import DashboardHeader from "../components/DashboardHeader";
+import CrearPedido from "../components/CrearPedido";
+import WhatsApp from "../icons/whatsapp.jsx";
 import "../styles/dashboard.css";
-import { useEffect } from "react";
 
 export default function Dashboard() {
   const { usuario, crearUsuario, eliminarUsuario, cargando } = useUsuario();
   const [modalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  const whatsappClick = (text) => {
+    const phoneNumber = "573157703322";
+    const encodedText = encodeURIComponent(text);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
   const orders = {
     creadas: [
@@ -78,6 +85,17 @@ export default function Dashboard() {
         onClose={() => setModalOpen(false)}
         onSubmit={(data) => console.log("Pedido creado:", data)}
       />
+
+      <button
+        className="whatsapp-btn"
+        onClick={() =>
+          whatsappClick(
+            `Hola mi nombre es ${usuario?.username}, necesito asistencia con mi pedido.`
+          )
+        }
+      >
+        <WhatsApp />
+      </button>
     </div>
   );
 }

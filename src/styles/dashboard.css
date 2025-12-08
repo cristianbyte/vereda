@@ -128,3 +128,33 @@
   margin-top: 10px;
   padding: 8px;
 }
+
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: #25d366;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: var(--fontSizeSmall);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+  background: #20ba5a;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:active {
+  transform: scale(0.98);
+}
