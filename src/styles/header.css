@@ -1,5 +1,6 @@
 .header {
-  top: 2%;
+  margin-top: 2%;
+  top: 0%;
   left: 2%;
   position: sticky;
   display: flex;
@@ -21,6 +22,18 @@
   );
   justify-content: space-between;
   align-items: center;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--white);
+  width: min-auto;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: var(--fontSizeMedium);
+  line-height: var(--fontSizeMedium);
 }
 
 .container-header div {

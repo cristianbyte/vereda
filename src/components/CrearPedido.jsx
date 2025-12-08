@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "../styles/crearPedido.css";
 import ShowMap from "./ShowMap";
+import "../styles/crearPedido.css";
 
 export default function CrearPedido({ isOpen, onClose, onSubmit }) {
   const userInfo = { name: "Juan Pérez" }; // Simulación de datos del usuario

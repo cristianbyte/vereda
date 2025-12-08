@@ -10,8 +10,9 @@ export default function Header() {
   return (
     <div className="header">
       <div className="container-header">
-        <a href="/" rel="noopener noreferrer">
+        <a href="/" rel="noopener noreferrer" className="header-logo">
           <Logo />
+          <div>Vereda Spress</div>
         </a>
         <nav>
           <div
