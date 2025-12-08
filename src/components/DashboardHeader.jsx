@@ -6,6 +6,12 @@ import "../styles/dashboardHeader.css";
 
 export default function DashboardHeader({ user, onLogOut }) {
   const navigate = useNavigate();
+  const handleLogOut = () => {
+    const seguro = window.confirm("¿Estás seguro de que quieres salir?");
+    if (!seguro) return;
+    onLogOut();
+    navigate("/");
+  };
   return (
     <div className="dashboardHeader">
       <div className="dashboardheader-container">
@@ -15,16 +21,13 @@ export default function DashboardHeader({ user, onLogOut }) {
         </a>
         <nav>
           <div>{user}</div>
-          <div
-            className="logout-button"
-            onClick={() => {
-              onLogOut();
-              navigate("/");
-            }}
-          >
-            Cerrar <LogOut />
+          <div className="logout-button" onClick={handleLogOut}>
+            Salir <LogOut />
           </div>
         </nav>
+        <div className="menu-toggle">
+          <LogOut />
+        </div>
       </div>
     </div>
   );
