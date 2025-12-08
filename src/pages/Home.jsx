@@ -2,12 +2,34 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ModalAuth from "../components/ModalAuth";
+import { Carga, Paquete, Sobre } from "../icons/tipos.jsx";
 import concepto from "/concept-mujer-entrega-canasta.png";
 import "../styles/home.css";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [initialMode, setInitialMode] = useState("login");
+
+  const servicios = [
+    {
+      Icon: Sobre,
+      title: "Sobre",
+      description:
+        "Envío rápido y seguro de documentos y cartas. Ideal para correspondencia urgente.",
+    },
+    {
+      Icon: Paquete,
+      title: "Paquete",
+      description:
+        "Transporte de paquetes medianos con seguimiento en tiempo real y entrega garantizada.",
+    },
+    {
+      Icon: Carga,
+      title: "Carga",
+      description:
+        "Soluciones para envíos de gran volumen. Servicio especializado para carga pesada.",
+    },
+  ];
 
   return (
     <div className="home">
@@ -62,9 +84,15 @@ export default function Home() {
       <section className="section">
         <h2>Tipos de servicio</h2>
         <div className="cards">
-          <div className="card">Sobre</div>
-          <div className="card">Paquete</div>
-          <div className="card">Carga</div>
+          {servicios.map((service, index) => (
+            <div key={index} className="card">
+              <div className="card-icon">
+                <service.Icon />
+              </div>
+              <h3 className="card-title">{service.title}</h3>
+              <p className="card-description">{service.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
