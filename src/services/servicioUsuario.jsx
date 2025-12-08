@@ -2,8 +2,6 @@ const API = "http://localhost:8080/api/v0/usuarios";
 
 export async function servicioCrearUsuario(data) {
   try {
-    console.log("Data sent to server:", data);
-
     const response = await fetch(`${API}/registro`, {
       method: "POST",
       headers: {
@@ -31,8 +29,6 @@ export async function servicioCrearUsuario(data) {
 
 export async function servicioObtenerUsuario(data) {
   try {
-    console.log("Credentials sent to server:", { data });
-
     const response = await fetch(`${API}/login`, {
       method: "POST",
       headers: {

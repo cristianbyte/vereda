@@ -9,7 +9,10 @@ export default function DashboardHeader({ user, onLogOut }) {
   return (
     <div className="dashboardHeader">
       <div className="dashboardheader-container">
-        <Logo />
+        <a href="/" rel="noopener noreferrer" className="header-logo">
+          <Logo />
+          <div>Vereda Spress</div>
+        </a>
         <nav>
           <div>{user}</div>
           <div

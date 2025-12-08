@@ -75,9 +75,15 @@ export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
     }
 
     if (mode === "login") {
-      console.log("Logging in with:", fullName, password);
-      const res = await obtenerUsuario(fullName, password);
-      res && navigate("/dashboard");
+      let res;
+      try {
+        res = await obtenerUsuario(fullName, password);
+
+        navigate("/dashboard");
+      } catch (error) {
+        setErrors({ password: "Nombre o contraseña incorrectos" });
+        console.error(error);
+      }
     } else {
       const res = await crearUsuario(fullName, email, password);
       res && navigate("/dashboard");

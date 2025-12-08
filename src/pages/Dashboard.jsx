@@ -14,104 +14,24 @@ export default function Dashboard() {
 
   const orders = {
     creadas: [
-      {
-        id: 1,
-        tipo: "Paquete",
-        nombreCLiente: "Carlos Gómez",
-        desde: {
-          name: "Medellín Centro",
-          ubi: "Avenida 45 #12-34",
-        },
-        hasta: {
-          name: "Vereda La Esperanza",
-          ubi: "Calle 123 #45-67",
-        },
-        fecha: "2025-12-10",
-        notas: "Compras: -10m de manguera -5kg de fertilizante.",
-      },
-
-      {
-        id: 2,
-        tipo: "Sobre",
-        nombreCLiente: "María Restrepo",
-        desde: {
-          name: "Rionegro Plaza",
-          ubi: "Carrera 22 #31-08",
-        },
-        hasta: {
-          name: "Vereda El Carmelo",
-          ubi: "Sector La Cascada, Casa 7",
-        },
-        fecha: "2025-12-11",
-        notas: "Entrega de documentos médicos.",
-      },
+      // {
+      //   id: 1,
+      //   tipo: "Paquete",
+      //   nombreCLiente: "Carlos Gómez",
+      //   desde: {
+      //     name: "Medellín Centro",
+      //     ubi: "Avenida 45 #12-34",
+      //   },
+      //   hasta: {
+      //     name: "Vereda La Esperanza",
+      //     ubi: "Calle 123 #45-67",
+      //   },
+      //   fecha: "2025-12-10",
+      //   notas: "Compras: -10m de manguera -5kg de fertilizante.",
+      // },
     ],
-    pendientes: [
-      {
-        id: 3,
-        tipo: "Paquete",
-        nombreCLiente: "Juan Pablo Vélez",
-        desde: {
-          name: "La Ceja Centro",
-          ubi: "Calle 15 #18-50",
-        },
-        hasta: {
-          name: "Vereda El Higuerón",
-          ubi: "Entrada por la finca La Palma",
-        },
-        fecha: "2025-12-09",
-        notas: "Compras: -1 saco de concentrado -herramientas pequeñas.",
-      },
-    ],
-    completadas: [
-      {
-        id: 4,
-        tipo: "Exclusivo",
-        nombreCLiente: "Doña Rosalba Quintero",
-        desde: {
-          name: "Marinilla Mercado",
-          ubi: "Carrera 30 #20-12",
-        },
-        hasta: {
-          name: "Vereda La Honda",
-          ubi: "Finca El Encanto",
-        },
-        fecha: "2025-12-08",
-        notas: "Carga grande: -2 bultos de maíz -materiales para corral.",
-      },
-
-      {
-        id: 5,
-        tipo: "Paquete",
-        nombreCLiente: "Andrés Montoya",
-        desde: {
-          name: "Guarne Centro",
-          ubi: "Calle 32 #14-22",
-        },
-        hasta: {
-          name: "Vereda La Brizuela",
-          ubi: "Sector La Loma, casa azul",
-        },
-        fecha: "2025-12-12",
-        notas: "Mercado semanal: arroz, panela, verduras.",
-      },
-
-      {
-        id: 6,
-        tipo: "Sobre",
-        nombreCLiente: "Luz Elena Castaño",
-        desde: {
-          name: "San Antonio de Pereira",
-          ubi: "Parque principal, kiosco 4",
-        },
-        hasta: {
-          name: "Vereda Llanogrande",
-          ubi: "Portón café, kilómetro 3",
-        },
-        fecha: "2025-12-13",
-        notas: "Sobre con facturas y papeles de la finca.",
-      },
-    ],
+    pendientes: [],
+    completadas: [],
   };
 
   useEffect(() => {
@@ -133,21 +53,21 @@ export default function Dashboard() {
       <div className="orders-container">
         <div className="order-section">
           <h3>Órdenes creadas</h3>
-          {orders.creadas.map((o) => (
+          {orders?.creadas.map((o) => (
             <OrderCard key={o.id} data={o} />
           ))}
         </div>
 
         <div className="order-section">
           <h3>Órdenes pendientes</h3>
-          {orders.pendientes.map((o) => (
+          {orders?.pendientes.map((o) => (
             <OrderCard key={o.id} data={o} />
           ))}
         </div>
 
         <div className="order-section">
           <h3>Órdenes completadas</h3>
-          {orders.completadas.map((o) => (
+          {orders?.completadas.map((o) => (
             <OrderCard key={o.id} data={o} />
           ))}
         </div>
