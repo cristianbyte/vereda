@@ -5,7 +5,10 @@ import DashboardHeader from "../components/DashboardHeader";
 import CrearPedido from "../components/CrearPedido";
 import WhatsApp from "../icons/whatsapp.jsx";
 import "../styles/dashboard.css";
-import { servicioCrearPedido } from "../services/servicioPedido.jsx";
+import {
+  servicioCrearPedido,
+  servicioObtenerPedidos,
+} from "../services/servicioPedido.jsx";
 
 export default function Dashboard() {
   const { usuario, crearUsuario, eliminarUsuario, cargando } = useUsuario();
@@ -25,27 +28,11 @@ export default function Dashboard() {
     window.open(whatsappUrl, "_blank");
   };
 
-  const orders = {
-    creadas: [
-      // {
-      //   id: 1,
-      //   tipo: "Paquete",
-      //   nombreCLiente: "Carlos Gómez",
-      //   desde: {
-      //     name: "Medellín Centro",
-      //     ubi: "Avenida 45 #12-34",
-      //   },
-      //   hasta: {
-      //     name: "Vereda La Esperanza",
-      //     ubi: "Calle 123 #45-67",
-      //   },
-      //   fecha: "2025-12-10",
-      //   notas: "Compras: -10m de manguera -5kg de fertilizante.",
-      // },
-    ],
+  const [orders, setOrders] = useState({
+    creadas: [],
     pendientes: [],
     completadas: [],
-  };
+  });
 
   useEffect(() => {
     if (!usuario) {
@@ -53,7 +40,52 @@ export default function Dashboard() {
     }
   }, [usuario, navigate]);
 
-  console.log("Usuario en Dashboard:", usuario?.username);
+  useEffect(() => {
+    if (!usuario || !usuario.id) {
+      console.log("Usuario no listo todavía...");
+      return;
+    }
+
+    const cargarPedidos = async () => {
+      try {
+        console.log("usuarioid:", usuario.id);
+
+        const respuesta = await servicioObtenerPedidos(usuario.id);
+        console.log("RESPUESTA PEDIDOS:", respuesta);
+
+        const nuevasOrders = {
+          creadas: [],
+          pendientes: [],
+          completadas: [],
+        };
+
+        respuesta.forEach((p) => {
+          switch (p.estado) {
+            case "CREADO":
+              nuevasOrders.creadas.push(p);
+              break;
+
+            case "PENDIENTE":
+              nuevasOrders.pendientes.push(p);
+              break;
+
+            case "COMPLETADO":
+              nuevasOrders.completadas.push(p);
+              break;
+
+            default:
+              console.warn("Estado no reconocido:", p.estado);
+          }
+        });
+
+        setOrders(nuevasOrders);
+      } catch (error) {
+        console.error("Error cargando pedidos:", error);
+      }
+    };
+
+    cargarPedidos();
+  }, [usuario]); // ← aquí va usuario
 
   return (
     <div className="dashboard">
@@ -114,19 +146,19 @@ function OrderCard({ data }) {
       <div className="order-info">
         <h4>{data.nombreCLiente}</h4>
         <p>
-          <strong>Tipo:</strong> {data.tipo}
+          <strong>Tipo:</strong> {data.servicioNombre}
         </p>
         <p>
-          <strong>{data.desde.name}</strong> <br />
-          <span>{data.desde.ubi}</span>
+          <strong>{data.localizacionEntrega}</strong> <br />
+          <span>{data.localizacionEntrega}</span>
           <br />
-          <strong>{data.hasta.name}</strong>
+          <strong>{data.localizacionRecoleccion}</strong>
           <br />
-          <span>{data.hasta.ubi}</span>
+          <span>{data.localizacionRecoleccion}</span>
           <br />
         </p>
         <p>
-          <strong>Fecha:</strong> {data.fecha}
+          <strong>Fecha:</strong> {data.fechaEntrega}
         </p>
         <p className="order-notes">
           <strong>Notas:</strong> {data.notas}
