@@ -5,12 +5,18 @@ import DashboardHeader from "../components/DashboardHeader";
 import CrearPedido from "../components/CrearPedido";
 import WhatsApp from "../icons/whatsapp.jsx";
 import "../styles/dashboard.css";
+import { servicioCrearPedido } from "../services/servicioPedido.jsx";
 
 export default function Dashboard() {
   const { usuario, crearUsuario, eliminarUsuario, cargando } = useUsuario();
   const [modalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  const creacionPedido = async (data) => {
+    await servicioCrearPedido(data);
+    console.log("pedido creado.");
+  };
 
   const whatsappClick = (text) => {
     const phoneNumber = "573157703322";
@@ -83,7 +89,9 @@ export default function Dashboard() {
       <CrearPedido
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        onSubmit={(data) => console.log("Pedido creado:", data)}
+        onSubmit={(data) => {
+          creacionPedido(data);
+        }}
       />
 
       <button

@@ -8,6 +8,7 @@ export default function CrearPedido({ isOpen, onClose, onSubmit }) {
   const { usuario } = useUsuario();
   const [showMap, setShowMap] = useState(false);
   const hoy = new Date().toISOString().split("T")[0];
+
   const [fechaFormateada, setFechaFormateada] = useState("");
 
   const formatearFecha = (f) => {
@@ -18,17 +19,26 @@ export default function CrearPedido({ isOpen, onClose, onSubmit }) {
 
   const [form, setForm] = useState({
     usuarioId: usuario?.id,
-    servicioId: "2",
+    servicioId: 2,
     fechaEntrega: hoy,
     localizacionEntrega: "",
     localizacionRecoleccion: "",
-    notas: "",
+    // notas: "",
   });
 
   useEffect(() => {
     setFechaFormateada(formatearFecha(form.fechaEntrega));
     console.log("fecha cambio:", form.fechaEntrega);
   }, [form.fechaEntrega]);
+
+  useEffect(() => {
+    if (usuario?.id) {
+      setForm((prev) => ({
+        ...prev,
+        usuarioId: usuario.id,
+      }));
+    }
+  }, [usuario]);
 
   if (!isOpen) return null;
 
@@ -60,9 +70,9 @@ export default function CrearPedido({ isOpen, onClose, onSubmit }) {
               value={form.servicioId}
               onChange={handleChange}
             >
-              <option value="2">Paquete</option>
-              <option value="1">Sobre</option>
-              <option value="3">Carga</option>
+              <option value={2}>Paquete</option>
+              <option value={1}>Sobre</option>
+              <option value={3}>Carga</option>
             </select>
           </div>
 
