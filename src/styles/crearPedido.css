@@ -42,8 +42,19 @@ h2 {
 
 .field {
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 6px;
+}
+
+.field:last-child {
+  width: min-content;
+}
+
+.field-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .field label {
@@ -70,16 +81,20 @@ textarea {
 }
 
 .map-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 55px;
   border: none;
   border-radius: 6px;
   font-size: 22px;
   cursor: pointer;
-  background: #e8f6f3;
+  color: var(--greenBack2);
 }
 
 .map-btn:hover {
-  background: #d0ebe5;
+  background: var(--greenBack2);
+  color: var(--white);
 }
 
 .btn-submit {
@@ -96,4 +111,18 @@ textarea {
 
 .btn-submit:hover {
   background: #17a589;
+}
+
+input[type="date"] {
+  width: min-content;
+  color: red;
+}
+input[type="date"]::-webkit-datetime-edit {
+  display: none;
+  border: none;
+  outline: none;
+}
+.text-area {
+  border: none;
+  background-color: var(--shadow);
 }

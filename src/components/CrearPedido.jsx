@@ -1,18 +1,34 @@
-import { useState } from "react";
+import { useUsuario } from "../context/ProvedorUsuario";
+import { useState, useEffect } from "react";
 import ShowMap from "./ShowMap";
+import Pin from "../icons/pin";
 import "../styles/crearPedido.css";
 
 export default function CrearPedido({ isOpen, onClose, onSubmit }) {
-  const userInfo = { name: "Juan Pérez" }; // Simulación de datos del usuario
+  const { usuario } = useUsuario();
   const [showMap, setShowMap] = useState(false);
+  const hoy = new Date().toISOString().split("T")[0];
+  const [fechaFormateada, setFechaFormateada] = useState("");
+
+  const formatearFecha = (f) => {
+    if (!f) return "";
+    const [y, m, d] = f.split("-");
+    return `${d}/${m}`;
+  };
 
   const [form, setForm] = useState({
-    nombre: userInfo.name,
-    tipo: "",
-    destinoEscrito: "",
-    fecha: "",
+    usuarioId: usuario?.id,
+    servicioId: "2",
+    fechaEntrega: hoy,
+    localizacionEntrega: "",
+    localizacionRecoleccion: "",
     notas: "",
   });
+
+  useEffect(() => {
+    setFechaFormateada(formatearFecha(form.fechaEntrega));
+    console.log("fecha cambio:", form.fechaEntrega);
+  }, [form.fechaEntrega]);
 
   if (!isOpen) return null;
 
@@ -39,78 +55,77 @@ export default function CrearPedido({ isOpen, onClose, onSubmit }) {
           {/* Tipo */}
           <div className="field">
             <label>Tipo de pedido</label>
-            <select name="tipo" value={form.tipo} onChange={handleChange}>
-              <option value="">Seleccionar tipo</option>
-              <option value="Sobre">Papeles</option>
-              <option value="Paquete">Paquete</option>
-              <option value="Exclusivo">Exclusivo</option>
+            <select
+              name="servicioId"
+              value={form.servicioId}
+              onChange={handleChange}
+            >
+              <option value="2">Paquete</option>
+              <option value="1">Sobre</option>
+              <option value="3">Carga</option>
             </select>
           </div>
 
-          {/* Remitente */}
-          <div className="field">
-            <label>Ubicación</label>
-            <div className="destino-row">
-              <input
-                type="text"
-                name="destinoEscrito"
-                placeholder="Escribir dirección..."
-                value={form.destinoEscrito}
-                onChange={handleChange}
-              />
-              <button
-                type="button"
-                className="map-btn"
-                onClick={() => setShowMap(true)}
-              >
-                📍
-              </button>
-            </div>
+          {/* Origen */}
+          <div className="field-row">
+            <input
+              type="text"
+              name="localizacionRecoleccion"
+              placeholder="Origen..."
+              value={form.localizacionRecoleccion}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="map-btn"
+              onClick={() => setShowMap(true)}
+            >
+              <Pin />
+            </button>
           </div>
 
           {showMap && <ShowMap setShowMap={setShowMap} />}
 
           {/* Destino */}
-          <div className="field">
-            <label>Destino</label>
-            <div className="destino-row">
-              <input
-                type="text"
-                name="destinoEscrito"
-                placeholder="Escribir dirección..."
-                value={form.destinoEscrito}
-                onChange={handleChange}
-              />
-              <button
-                type="button"
-                className="map-btn"
-                onClick={() => setShowMap(true)}
-              >
-                📍
-              </button>
-            </div>
-          </div>
-
-          {/* Fecha */}
-          <div className="field">
-            <label>Fecha del pedido</label>
+          <div className="field-row">
             <input
-              type="date"
-              name="fecha"
-              value={form.fecha}
+              type="text"
+              name="localizacionEntrega"
+              placeholder="Destino..."
+              value={form.localizacionEntrega}
               onChange={handleChange}
             />
+            <button
+              type="button"
+              className="map-btn"
+              onClick={() => setShowMap(true)}
+            >
+              <Pin />
+            </button>
           </div>
 
-          {/* Notas */}
-          <div className="field">
-            <label>Notas</label>
-            <textarea
-              name="notas"
-              placeholder="Escribe detalles adicionales del pedido..."
-              value={form.notas}
-              onChange={handleChange}
-            ></textarea>
+          <div className="field-row">
+            {/* Notas */}
+            <div className="field">
+              <textarea
+                name="notas"
+                placeholder="Detalles adicionales.."
+                value={form.notas}
+                onChange={handleChange}
+                className="text-area"
+              ></textarea>
+            </div>
+            {/* Fecha */}
+            <div className="field">
+              <input
+                type="date"
+                name="fechaEntrega"
+                value={form.fechaEntrega}
+                onChange={handleChange}
+                min={hoy}
+              />
+              <div>{fechaFormateada}</div>
+            </div>
           </div>
 
           <button type="submit" className="btn-submit">

@@ -19,7 +19,7 @@
   max-width: 450px;
   height: auto;
   padding: 5vh 35px;
-  background: white;
+  background: var(--white);
   border-radius: 12px;
   border: 2px solid var(--greenBack);
   position: relative;
@@ -49,19 +49,30 @@
 }
 
 .modal-box input {
-  padding: 12px;
-  border: 2px solid var(--greenBack);
-  border-radius: 8px;
+  padding: 0.8rem;
+  border: none;
+  background-color: var(--shadow);
+  border-radius: 10px;
   font-size: 15px;
+}
+.modal-box input:focus {
+  outline: none;
+  box-shadow: 0 0 0px 2px var(--greenBack);
 }
 
 .btn-outline {
   padding: 12px;
   background: white;
   border: 2px solid var(--greenBack);
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--greenBack);
   font-weight: bold;
+}
+
+.btn-outline:hover {
+  background: var(--greenBack);
+  color: white;
+  transition: 0.2s;
 }
 
 .switch-text {
