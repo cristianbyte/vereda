@@ -158,3 +158,38 @@
 .whatsapp-btn:active {
   transform: scale(0.98);
 }
+
+.estado-pago {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.estado-pago .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--white);
+  opacity: 0.5;
+}
+
+/* Colores por estado ----------------------------------- */
+
+.estado-null,
+.estado-0 {
+  background: #d9534f;
+}
+.estado-1 {
+  background: #f0ad4e;
+}
+
+.estado-2 {
+  background: #5cb85c;
+}

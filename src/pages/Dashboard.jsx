@@ -144,17 +144,25 @@ function OrderCard({ data }) {
   return (
     <div className="order-card">
       <div className="order-info">
-        <h4>{data.nombreCLiente}</h4>
+        <h4>{data.usuarioUsername}</h4>
+        <div className={`estado-pago estado-${data.pagoId ?? "null"}`}>
+          <span className="dot"></span>
+          {data.pagoId == null || data.pagoId === 0
+            ? "No pagado"
+            : data.pagoId === 1
+            ? "En proceso"
+            : "Pagado"}
+        </div>
         <p>
           <strong>Tipo:</strong> {data.servicioNombre}
         </p>
         <p>
           <strong>{data.localizacionEntrega}</strong> <br />
-          <span>{data.localizacionEntrega}</span>
+          {/* <span>{data.localizacionEntrega}</span> */}
           <br />
           <strong>{data.localizacionRecoleccion}</strong>
           <br />
-          <span>{data.localizacionRecoleccion}</span>
+          {/* <span>{data.localizacionRecoleccion}</span> */}
           <br />
         </p>
         <p>
@@ -167,7 +175,6 @@ function OrderCard({ data }) {
 
       <div className="order-detalles">
         <img src="/VRD. Espinal - MED. Centro.png" alt="" />
-        <button className="btn-outline small-btn">Ver detalles</button>
       </div>
     </div>
   );
