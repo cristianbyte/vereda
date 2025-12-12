@@ -76,7 +76,7 @@
 }
 
 .switch-text {
-  margin-top: 15px;
+  margin-top: 0px;
   font-size: 14px;
 }
 
@@ -93,4 +93,23 @@
   font-weight: bold;
   display: block;
   margin-top: 0.25rem;
+}
+
+.separador {
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--shadow2);
+}
+
+.oauth {
+  color: var(--shadow);
+  background-color: var(--shadow2);
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  gap: 10px;
+  border-radius: 10px;
 }

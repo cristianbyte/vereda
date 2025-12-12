@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useUsuario } from "../context/ProvedorUsuario";
+import { GoogleIcon } from "../icons/OAuth";
 import "../styles/modalAuth.css";
 
 export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
@@ -177,6 +178,16 @@ export default function ModalAuth({ isOpen, onClose, initialMode = "login" }) {
             {mode === "login" ? " Crear una" : " Iniciar sesión"}
           </span>
         </p>
+        <div className="separador"></div>
+        {mode == "login" ? (
+          <button type="button" className="oauth" disabled>
+            <GoogleIcon /> Iniciar con Google
+          </button>
+        ) : (
+          <button type="button" className="oauth" disabled>
+            <GoogleIcon /> Registro con Google
+          </button>
+        )}
       </div>
     </div>
   );
